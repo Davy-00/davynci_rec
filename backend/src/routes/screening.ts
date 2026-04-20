@@ -93,7 +93,7 @@ router.post("/trigger", aiLimiter, async (req: Request, res: Response) => {
             await ScreeningResultModel.collection.updateOne(
               { _id: screeningDoc._id },
               { 
-                $push: { candidateProgress: candidateDetails },
+                $push: { candidateProgress: candidateDetails } as any,
                 $set: { 
                   "progress.completed": completed,
                   "progress.total": total,

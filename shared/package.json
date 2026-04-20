@@ -1,0 +1,14 @@
+{
+  "name": "@davinci/shared",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "echo 'shared types only'"
+  },
+  "types": "types.d.ts",
+  "exports": {
+    ".": {
+      "types": "./types.d.ts"
+    }
+  }
+}

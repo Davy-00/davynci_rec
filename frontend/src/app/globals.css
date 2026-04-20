@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Scrollbar ─────────────────────────── */
+.scrollbar-thin::-webkit-scrollbar { width: 3px; }
+.scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+.scrollbar-thin::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 2px; }
+.scrollbar-thin::-webkit-scrollbar-thumb:hover { background: #334155; }
+
+/* ── Selection ─────────────────────────── */
+::selection {
+  background: rgba(34, 211, 238, 0.2);
+  color: #f0f9ff;
+}
+
+/* ── Focus ─────────────────────────────── */
+:focus-visible {
+  outline: 2px solid rgba(34, 211, 238, 0.4);
+  outline-offset: 2px;
+}
+
+/* ── Transitions ───────────────────────── */
+*, *::before, *::after {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Dot grid background ────────────────── */
+.dot-bg {
+  background-color: #080810;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* ── Fade rise entrance ─────────────────── */
+.fade-rise {
+  animation: fadeRise 0.4s ease both;
+}
+
+@keyframes fadeRise {
+  0%   { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Mono blink cursor ─────────────────── */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+.blink { animation: blink 1s step-end infinite; }
+
+/* ── Signal glow ────────────────────────── */
+.signal-glow {
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.15), 0 0 40px rgba(34, 211, 238, 0.06);
+}
+
+/* ── Date/Month Picker Calendar Styling ─── */
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="month"]::-webkit-calendar-picker-indicator {
+  filter: invert(1) brightness(1.2);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover,
+input[type="month"]::-webkit-calendar-picker-indicator:hover {
+  background: rgba(34, 211, 238, 0.1);
+}
+
+/* WebKit-based date picker popup styling */
+::-webkit-datetime-edit {
+  padding: 0;
+  color: rgb(226, 232, 240);
+}
+
+::-webkit-datetime-edit-text {
+  color: rgb(100, 116, 139);
+  padding: 0 4px;
+}
+
+::-webkit-datetime-edit-month-field,
+::-webkit-datetime-edit-day-field,
+::-webkit-datetime-edit-year-field {
+  color: rgb(226, 232, 240);
+  padding: 2px 4px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+::-webkit-datetime-edit-month-field:focus,
+::-webkit-datetime-edit-day-field:focus,
+::-webkit-datetime-edit-year-field:focus {
+  background: rgba(34, 211, 238, 0.15);
+  color: rgb(34, 211, 238);
+  outline: none;
+}
+

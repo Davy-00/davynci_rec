@@ -70,7 +70,8 @@ router.post("/login", async (req: Request, res: Response): Promise<void> => {
   const envUser = process.env.HR_USERNAME || "admin";
   const envPass = process.env.HR_PASSWORD || "admin123";
   if (trimmed === envUser && password === envPass) {
-    const token = jwt.sign({ role: "hr" }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
+    // Use a stable synthetic sub so req.userId is always set for this admin
+    const token = jwt.sign({ role: "hr", sub: "env-admin" }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
     res.json({ success: true, token, expiresIn: JWT_EXPIRES_IN });
     return;
   }

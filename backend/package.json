@@ -7,6 +7,8 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "seed": "tsx src/scripts/seed.ts",
+    "seed:demo": "tsx src/scripts/seedDemo.ts",
+    "seed:large": "tsx src/scripts/seedBigDemo.ts",
     "debug:screening": "tsx src/scripts/debugScreening.ts"
   },
   "dependencies": {

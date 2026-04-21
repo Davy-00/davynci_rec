@@ -5,12 +5,13 @@ import { resolveGeminiModel } from "./geminiModel";
 const generationConfig: GenerationConfig = {
   temperature: 0.1,
   topP: 0.9,
-  maxOutputTokens: 4096,
+  maxOutputTokens: 8192,
   responseMimeType: "application/json",
-};
+  thinkingConfig: { thinkingBudget: 0 },
+} as GenerationConfig & { thinkingConfig?: { thinkingBudget: number } };
 
 function getReasoningModel() {
-  return resolveGeminiModel(process.env.GEMINI_REASONING_MODEL, "gemini-2.0-flash");
+  return resolveGeminiModel(process.env.GEMINI_REASONING_MODEL, "gemini-2.5-flash");
 }
 
 function getGenAI() {

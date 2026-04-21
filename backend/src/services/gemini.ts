@@ -3,7 +3,7 @@ import type { HireVerdict, RankedCandidate, ScoreBreakdown, TalentProfile } from
 import { resolveGeminiModel } from "./geminiModel";
 
 function getReasoningModel() {
-  return resolveGeminiModel(process.env.GEMINI_REASONING_MODEL, "gemini-2.0-flash");
+  return resolveGeminiModel(process.env.GEMINI_REASONING_MODEL, "gemini-2.5-flash");
 }
 
 // Conservative delay between sequential candidate calls to respect RPM limits
@@ -13,9 +13,11 @@ const INTER_CALL_DELAY_MS = 1000;
 const singleCandidateConfig: GenerationConfig = {
   temperature: 0.2,
   topP: 0.95,
-  maxOutputTokens: 4096,
+  maxOutputTokens: 8192,
   responseMimeType: "application/json",
-};
+  // Disable thinking budget so 2.5-flash doesn't consume output tokens on reasoning
+  thinkingConfig: { thinkingBudget: 0 },
+} as GenerationConfig & { thinkingConfig?: { thinkingBudget: number } };
 
 function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -521,7 +523,11 @@ function shouldFastFallback(error: Error): boolean {
     message.includes("not found") ||
     message.includes("api key") ||
     message.includes("permission") ||
-    message.includes("unauthorized")
+    message.includes("unauthorized") ||
+    message.includes("400") ||
+    message.includes("bad request") ||
+    message.includes("json mode") ||
+    message.includes("unparseable json")
   );
 }
 
@@ -948,7 +954,10 @@ FINAL overallScore formula:
         parsed = JSON.parse(text);
       } catch {
         const match = text.match(/\{[\s\S]*\}/);
-        if (!match) throw new Error("Unparseable JSON from Gemini");
+        if (!match) {
+          console.error("[Gemini] Raw model output (truncated):", text.slice(0, 400));
+          throw new Error("Unparseable JSON from Gemini");
+        }
         parsed = JSON.parse(match[0]);
       }
 

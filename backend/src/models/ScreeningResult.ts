@@ -37,7 +37,14 @@ interface RankedCandidateDoc {
   applicantId: mongoose.Types.ObjectId;
   candidateName: string;
   overallScore: number;
+  confidence?: number;
+  hireVerdict?: "strong_yes" | "yes" | "maybe" | "no";
   scoreBreakdown: ScoreBreakdownDoc;
+  matchedRequirements?: string[];
+  missingRequirements?: string[];
+  impactEvidence?: string[];
+  riskSignals?: string[];
+  interviewFocus?: string[];
   strengths: string[];
   gaps: string[];
   recommendation: string;
@@ -72,12 +79,22 @@ const ScreeningResultSchema = new Schema<ScreeningResultDoc>(
         applicantId: { type: Schema.Types.ObjectId, ref: "Applicant" },
         candidateName: String,
         overallScore: Number,
+        confidence: Number,
+        hireVerdict: {
+          type: String,
+          enum: ["strong_yes", "yes", "maybe", "no"],
+        },
         scoreBreakdown: {
           skillsMatch: Number,
           experienceRelevance: Number,
           educationFit: Number,
           overallRelevance: Number,
         },
+        matchedRequirements: [String],
+        missingRequirements: [String],
+        impactEvidence: [String],
+        riskSignals: [String],
+        interviewFocus: [String],
         strengths: [String],
         gaps: [String],
         recommendation: String,

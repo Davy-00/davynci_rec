@@ -147,12 +147,21 @@ export interface ScreeningResult {
   analysisStats?: { total: number; scored: number; insufficientDocs: number };
 }
 
+export type HireVerdict = "strong_yes" | "yes" | "maybe" | "no";
+
 export interface RankedCandidate {
   rank: number;
   applicantId: string;
   candidateName: string;
   overallScore: number;
+  confidence?: number;
+  hireVerdict?: HireVerdict;
   scoreBreakdown: ScoreBreakdown;
+  matchedRequirements?: string[];
+  missingRequirements?: string[];
+  impactEvidence?: string[];
+  riskSignals?: string[];
+  interviewFocus?: string[];
   strengths: string[];
   gaps: string[];
   recommendation: string;

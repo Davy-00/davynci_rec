@@ -11,6 +11,8 @@ export interface ScoreBreakdown {
   overallRelevance: number;
 }
 
+export type HireVerdict = "strong_yes" | "yes" | "maybe" | "no";
+
 export interface InterviewQuestion {
   question: string;
   rationale: string;
@@ -22,7 +24,14 @@ export interface RankedCandidate {
   applicantId: string;
   candidateName: string;
   overallScore: number;
+  confidence?: number;
+  hireVerdict?: HireVerdict;
   scoreBreakdown: ScoreBreakdown;
+  matchedRequirements?: string[];
+  missingRequirements?: string[];
+  impactEvidence?: string[];
+  riskSignals?: string[];
+  interviewFocus?: string[];
   strengths: string[];
   gaps: string[];
   recommendation: string;

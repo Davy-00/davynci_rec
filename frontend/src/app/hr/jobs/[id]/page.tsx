@@ -538,6 +538,31 @@ function CandidateCard({
     gap_probe: "text-orange-400 bg-orange-400/10",
     cultural_fit: "text-teal-400 bg-teal-400/10",
   };
+  const matchedRequirements = candidate.matchedRequirements ?? [];
+  const missingRequirements = candidate.missingRequirements ?? [];
+  const impactEvidence = candidate.impactEvidence ?? [];
+  const riskSignals = candidate.riskSignals ?? [];
+  const interviewFocus = candidate.interviewFocus ?? [];
+  const coverageTotal = matchedRequirements.length + missingRequirements.length;
+  const coveragePercent = coverageTotal > 0 ? Math.round((matchedRequirements.length / coverageTotal) * 100) : null;
+  const verdictLabel =
+    candidate.hireVerdict === "strong_yes"
+      ? "Strong yes"
+      : candidate.hireVerdict === "yes"
+      ? "Yes"
+      : candidate.hireVerdict === "maybe"
+      ? "Maybe"
+      : candidate.hireVerdict === "no"
+      ? "No"
+      : null;
+  const verdictClass =
+    candidate.hireVerdict === "strong_yes"
+      ? "bg-emerald-400/10 text-emerald-500 border-emerald-400/20"
+      : candidate.hireVerdict === "yes"
+      ? "bg-cyan-400/10 text-cyan-500 border-cyan-400/20"
+      : candidate.hireVerdict === "maybe"
+      ? "bg-amber-400/10 text-amber-500 border-amber-400/20"
+      : "bg-rose-400/10 text-rose-500 border-rose-400/20";
 
   return (
     <div
@@ -557,6 +582,23 @@ function CandidateCard({
         <div className="flex-1 min-w-0">
           <p className="font-bold text-slate-900 dark:text-slate-100 text-sm leading-none">{candidate.candidateName}</p>
           <p className="text-xs text-slate-600 truncate mt-1">{candidate.recommendation}</p>
+          <div className="flex items-center gap-1.5 flex-wrap mt-1.5">
+            {verdictLabel && (
+              <span className={clsx("inline-flex items-center rounded-full border px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide", verdictClass)}>
+                {verdictLabel}
+              </span>
+            )}
+            {typeof candidate.confidence === "number" && candidate.confidence > 0 && (
+              <span className="inline-flex items-center rounded-full border border-slate-200 dark:border-white/[0.08] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-300">
+                {candidate.confidence}% confidence
+              </span>
+            )}
+            {coveragePercent !== null && (
+              <span className="inline-flex items-center rounded-full border border-slate-200 dark:border-white/[0.08] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-300">
+                {coveragePercent}% coverage
+              </span>
+            )}
+          </div>
           {candidate.documentStatus !== "sufficient" && (
             <span
               className={clsx(
@@ -627,6 +669,30 @@ function CandidateCard({
               <span>{candidate.documentNotes}</span>
             </div>
           )}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
+            <div className="rounded-2xl border border-slate-200 dark:border-white/[0.06] bg-slate-50 dark:bg-white/[0.02] px-4 py-3">
+              <p className="text-[9px] tracking-[0.18em] text-slate-500 uppercase font-semibold mb-1.5">
+                Hire Verdict
+              </p>
+              <p className="text-sm font-bold text-slate-900 dark:text-slate-100">{verdictLabel ?? "Not set"}</p>
+            </div>
+            <div className="rounded-2xl border border-slate-200 dark:border-white/[0.06] bg-slate-50 dark:bg-white/[0.02] px-4 py-3">
+              <p className="text-[9px] tracking-[0.18em] text-slate-500 uppercase font-semibold mb-1.5">
+                Confidence
+              </p>
+              <p className="text-sm font-bold text-slate-900 dark:text-slate-100">
+                {typeof candidate.confidence === "number" ? `${candidate.confidence}%` : "Unknown"}
+              </p>
+            </div>
+            <div className="rounded-2xl border border-slate-200 dark:border-white/[0.06] bg-slate-50 dark:bg-white/[0.02] px-4 py-3">
+              <p className="text-[9px] tracking-[0.18em] text-slate-500 uppercase font-semibold mb-1.5">
+                Requirement Coverage
+              </p>
+              <p className="text-sm font-bold text-slate-900 dark:text-slate-100">
+                {coveragePercent !== null ? `${coveragePercent}%` : "Not enough data"}
+              </p>
+            </div>
+          </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-6">
             <div className="space-y-5">
               <div className="space-y-3">
@@ -688,33 +754,113 @@ function CandidateCard({
                   </ul>
                 </div>
               )}
+
+              {matchedRequirements.length > 0 && (
+                <div>
+                  <p className="text-[9px] tracking-[0.18em] text-slate-600 uppercase font-semibold mb-2">
+                    Verified Match Signals
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {matchedRequirements.map((item, i) => (
+                      <span key={i} className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-[11px] text-emerald-600 dark:text-emerald-300">
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {missingRequirements.length > 0 && (
+                <div>
+                  <p className="text-[9px] tracking-[0.18em] text-slate-600 uppercase font-semibold mb-2">
+                    Missing Or Unproven Requirements
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {missingRequirements.map((item, i) => (
+                      <span key={i} className="rounded-full border border-amber-400/20 bg-amber-400/10 px-3 py-1 text-[11px] text-amber-600 dark:text-amber-300">
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
-            <div className="h-52">
-              <ResponsiveContainer width="100%" height="100%">
-                <RadarChart data={radarData}>
-                  <PolarGrid stroke="#1e293b" />
-                  <PolarAngleAxis dataKey="subject" tick={{ fill: "#475569", fontSize: 10 }} />
-                  <Tooltip
-                    contentStyle={{
-                      background: "#0d0d1a",
-                      border: "1px solid rgba(34,211,238,0.12)",
-                      borderRadius: 10,
-                      fontSize: 12,
-                      color: "#f0f9ff",
-                    }}
-                    itemStyle={{ color: "#22d3ee" }}
-                  />
-                  <Radar
-                    name="Score"
-                    dataKey="value"
-                    stroke="#22d3ee"
-                    fill="#22d3ee"
-                    fillOpacity={0.1}
-                    strokeWidth={1.5}
-                  />
-                </RadarChart>
-              </ResponsiveContainer>
+            <div className="space-y-5">
+              <div className="h-52">
+                <ResponsiveContainer width="100%" height="100%">
+                  <RadarChart data={radarData}>
+                    <PolarGrid stroke="#1e293b" />
+                    <PolarAngleAxis dataKey="subject" tick={{ fill: "#475569", fontSize: 10 }} />
+                    <Tooltip
+                      contentStyle={{
+                        background: "#0d0d1a",
+                        border: "1px solid rgba(34,211,238,0.12)",
+                        borderRadius: 10,
+                        fontSize: 12,
+                        color: "#f0f9ff",
+                      }}
+                      itemStyle={{ color: "#22d3ee" }}
+                    />
+                    <Radar
+                      name="Score"
+                      dataKey="value"
+                      stroke="#22d3ee"
+                      fill="#22d3ee"
+                      fillOpacity={0.1}
+                      strokeWidth={1.5}
+                    />
+                  </RadarChart>
+                </ResponsiveContainer>
+              </div>
+
+              {impactEvidence.length > 0 && (
+                <div>
+                  <p className="text-[9px] tracking-[0.18em] text-slate-600 uppercase font-semibold mb-2">
+                    Impact Evidence
+                  </p>
+                  <ul className="space-y-1.5">
+                    {impactEvidence.map((item, i) => (
+                      <li key={i} className="flex items-start gap-2 text-xs text-slate-600 dark:text-slate-400">
+                        <CheckCircleIcon className="w-3.5 h-3.5 text-cyan-500 mt-0.5 shrink-0" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {riskSignals.length > 0 && (
+                <div>
+                  <p className="text-[9px] tracking-[0.18em] text-slate-600 uppercase font-semibold mb-2">
+                    Recruiter Attention Points
+                  </p>
+                  <ul className="space-y-1.5">
+                    {riskSignals.map((item, i) => (
+                      <li key={i} className="flex items-start gap-2 text-xs text-slate-600 dark:text-slate-400">
+                        <AlertTriangleIcon className="w-3.5 h-3.5 text-rose-500 mt-0.5 shrink-0" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {interviewFocus.length > 0 && (
+                <div>
+                  <p className="text-[9px] tracking-[0.18em] text-slate-600 uppercase font-semibold mb-2">
+                    What To Probe Next
+                  </p>
+                  <ul className="space-y-1.5">
+                    {interviewFocus.map((item, i) => (
+                      <li key={i} className="flex items-start gap-2 text-xs text-slate-600 dark:text-slate-400">
+                        <MessageSquareIcon className="w-3.5 h-3.5 text-sky-500 mt-0.5 shrink-0" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
 

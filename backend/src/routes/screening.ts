@@ -174,17 +174,27 @@ router.post("/trigger", aiLimiter, async (req: Request, res: Response) => {
 // GET /api/screening/job/:jobId — get all screenings for a job
 // NOTE: must be registered BEFORE /:id so Express doesn't match "job" as an id
 router.get("/job/:jobId", async (req: Request, res: Response) => {
-  const results = await ScreeningResultModel.find({ jobId: req.params.jobId, userId: req.userId })
-    .sort({ triggeredAt: -1 })
-    .lean();
-  res.json({ success: true, data: results });
+  try {
+    const results = await ScreeningResultModel.find({ jobId: req.params.jobId, userId: req.userId })
+      .sort({ triggeredAt: -1 })
+      .lean();
+    res.json({ success: true, data: results });
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    res.status(500).json({ success: false, error: msg });
+  }
 });
 
 // GET /api/screening/:id — poll for results
 router.get("/:id", async (req: Request, res: Response) => {
-  const result = await ScreeningResultModel.findOne({ _id: req.params.id, userId: req.userId }).lean();
-  if (!result) return res.status(404).json({ success: false, error: "Screening not found" });
-  res.json({ success: true, data: result });
+  try {
+    const result = await ScreeningResultModel.findOne({ _id: req.params.id, userId: req.userId }).lean();
+    if (!result) return res.status(404).json({ success: false, error: "Screening not found" });
+    res.json({ success: true, data: result });
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    res.status(500).json({ success: false, error: msg });
+  }
 });
 
 export default router;

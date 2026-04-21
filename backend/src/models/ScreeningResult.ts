@@ -1,8 +1,8 @@
 import mongoose, { Schema, Document } from "mongoose";
 
 export interface ScreeningResultDoc extends Document {
-  userId: mongoose.Types.ObjectId;
-  jobId: mongoose.Types.ObjectId;
+  userId: mongoose.Types.ObjectId | string;
+  jobId: mongoose.Types.ObjectId | string;
   triggeredAt: Date;
   shortlistSize: 10 | 20;
   shortlist: RankedCandidateDoc[];
@@ -69,8 +69,8 @@ interface BiasAuditDoc {
 
 const ScreeningResultSchema = new Schema<ScreeningResultDoc>(
   {
-    userId: { type: Schema.Types.ObjectId, ref: "User", required: true, index: true },
-    jobId: { type: Schema.Types.ObjectId, ref: "Job", required: true, index: true },
+    userId: { type: Schema.Types.Mixed, required: true, index: true },
+    jobId: { type: Schema.Types.Mixed, required: true, index: true },
     triggeredAt: { type: Date, default: Date.now },
     shortlistSize: { type: Number, enum: [10, 20], default: 10 },
     shortlist: [

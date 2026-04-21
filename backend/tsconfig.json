@@ -11,7 +11,7 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "paths": {
-      "@davinci/shared": ["../shared/types.d.ts"]
+      "@davinci/shared": ["./src/shared.types.ts"]
     }
   },
   "include": ["src/**/*"],

@@ -59,7 +59,7 @@ export default function PortalPage() {
         <p className="text-[10px] tracking-[0.3em] text-cyan-400/70 uppercase font-semibold mb-3">
           Open Positions
         </p>
-        <h1 className="text-4xl md:text-5xl font-black text-white tracking-tight leading-none mb-2">
+        <h1 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-none mb-2">
           Find Your Next Role
         </h1>
         <p className="text-slate-500 text-sm">
@@ -69,14 +69,14 @@ export default function PortalPage() {
 
       {/* Search */}
       <div className="fade-rise mb-8">
-        <div className="flex items-center gap-3 bg-[#0d0d1a] border border-white/[0.07] rounded-2xl px-4 py-3">
+        <div className="flex items-center gap-3 bg-white dark:bg-[#0d0d1a] border border-slate-200 dark:border-white/[0.07] rounded-2xl px-4 py-3">
           <SearchIcon className="w-4 h-4 text-slate-600 shrink-0" />
           <input
             type="text"
             placeholder="Search by title, skill, or location..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="flex-1 bg-transparent text-sm text-slate-100 placeholder-slate-600 focus:outline-none"
+            className="flex-1 bg-transparent text-sm text-slate-900 dark:text-slate-100 placeholder-slate-600 focus:outline-none"
           />
           {search && (
             <button
@@ -92,14 +92,14 @@ export default function PortalPage() {
       {/* Job list */}
       {loading ? (
         <div className="flex justify-center py-20">
-          <div className="w-5 h-5 border-2 border-white/[0.06] border-t-cyan-400 rounded-full animate-spin" />
+          <div className="w-5 h-5 border-2 border-slate-200 dark:border-white/[0.06] border-t-cyan-400 rounded-full animate-spin" />
         </div>
       ) : filtered.length === 0 ? (
-        <div className="flex flex-col items-center py-20 text-center bg-[#0d0d1a] border border-white/[0.04] rounded-2xl">
-          <div className="w-12 h-12 rounded-xl bg-white/[0.03] border border-white/[0.06] flex items-center justify-center mb-4">
+        <div className="flex flex-col items-center py-20 text-center bg-white dark:bg-[#0d0d1a] border border-slate-200 dark:border-white/[0.04] rounded-2xl">
+          <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.06] flex items-center justify-center mb-4">
             <BriefcaseIcon className="w-5 h-5 text-slate-700" />
           </div>
-          <p className="text-sm font-semibold text-slate-400">
+          <p className="text-sm font-semibold text-slate-700 dark:text-slate-400">
             {search ? "No matching positions" : "No open positions right now"}
           </p>
           <p className="text-xs text-slate-600 mt-1.5">
@@ -112,11 +112,11 @@ export default function PortalPage() {
             <Link
               key={job._id}
               href={`/portal/jobs/${job._id}`}
-              className="group flex flex-col gap-3 bg-[#0d0d1a] border border-white/[0.06] hover:border-cyan-400/20 rounded-2xl p-5 transition-all hover:bg-[#0d1520]"
+              className="group flex flex-col gap-3 bg-white dark:bg-[#0d0d1a] border border-slate-200 dark:border-white/[0.06] hover:border-cyan-400/20 rounded-2xl p-5 transition-all hover:bg-slate-50 dark:hover:bg-[#0d1520]"
             >
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
-                  <p className="text-base font-bold text-slate-100 group-hover:text-white transition-colors leading-tight">
+                  <p className="text-base font-bold text-slate-900 dark:text-slate-100 dark:group-hover:text-white transition-colors leading-tight">
                     {job.title}
                   </p>
                   {job.department && (
@@ -155,7 +155,7 @@ export default function PortalPage() {
                 {job.requirements.requiredSkills.slice(0, 5).map((skill) => (
                   <span
                     key={skill}
-                    className="text-[10px] text-slate-500 bg-white/[0.03] border border-white/[0.05] px-2 py-0.5 rounded-md font-medium"
+                    className="text-[10px] text-slate-500 bg-slate-100 dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.05] px-2 py-0.5 rounded-md font-medium"
                   >
                     {skill}
                   </span>

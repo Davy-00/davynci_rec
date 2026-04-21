@@ -95,13 +95,13 @@ export default function NewJobPage() {
       <div>
         <Link
           href="/hr"
-          className="inline-flex items-center gap-1.5 text-slate-600 hover:text-slate-300 text-xs font-medium transition-colors mb-6"
+          className="inline-flex items-center gap-1.5 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-300 text-xs font-medium transition-colors mb-6"
         >
           <ArrowLeftIcon className="w-3 h-3" />
           Dashboard
         </Link>
 
-        <h1 className="text-3xl font-black text-white tracking-tight mb-10">Create New Job</h1>
+        <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight mb-10">Create New Job</h1>
 
         <form onSubmit={handleSubmit} className="space-y-10">
           <Section label="Basic Information">
@@ -139,7 +139,7 @@ export default function NewJobPage() {
                       "px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all capitalize",
                       form.workType === wt
                         ? "bg-cyan-400/10 text-cyan-400 border-cyan-400/20"
-                        : "text-slate-600 border-white/[0.06] hover:text-slate-300 hover:border-white/[0.1]"
+                        : "text-slate-600 dark:text-slate-400 border-slate-200 dark:border-white/[0.06] hover:text-slate-900 dark:hover:text-slate-300 hover:border-slate-300 dark:hover:border-white/[0.1]"
                     )}
                   >
                     {wt}
@@ -153,7 +153,7 @@ export default function NewJobPage() {
                 Description
               </label>
               <textarea
-                className="w-full bg-transparent border border-white/[0.06] focus:border-cyan-400/40 rounded-xl px-4 py-3 text-sm text-slate-100 placeholder-slate-700 focus:outline-none transition-colors resize-none min-h-[100px]"
+                className="w-full bg-transparent border border-slate-200 dark:border-white/[0.06] focus:border-cyan-400/40 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-700 focus:outline-none transition-colors resize-none min-h-[100px]"
                 value={form.description}
                 onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))}
                 required
@@ -177,7 +177,7 @@ export default function NewJobPage() {
                         ? s === "active"
                           ? "bg-emerald-400/10 text-emerald-400 border-emerald-400/20"
                           : "bg-amber-400/10 text-amber-400 border-amber-400/20"
-                        : "text-slate-600 border-white/[0.06] hover:text-slate-300 hover:border-white/[0.1]"
+                        : "text-slate-600 dark:text-slate-400 border-slate-200 dark:border-white/[0.06] hover:text-slate-900 dark:hover:text-slate-300 hover:border-slate-300 dark:hover:border-white/[0.1]"
                     )}
                   >
                     {s}
@@ -195,7 +195,7 @@ export default function NewJobPage() {
               <input
                 type="number"
                 min={0}
-                className="w-24 bg-transparent border-b border-white/[0.08] focus:border-cyan-400 py-2 text-slate-100 focus:outline-none transition-colors text-sm tabular-nums"
+                className="w-24 bg-transparent border-b border-slate-200 dark:border-white/[0.08] focus:border-cyan-400 py-2 text-slate-900 dark:text-slate-100 focus:outline-none transition-colors text-sm tabular-nums"
                 value={form.yearsOfExperience}
                 onChange={(e) =>
                   setForm((f) => ({ ...f, yearsOfExperience: Number(e.target.value) }))
@@ -267,7 +267,7 @@ export default function NewJobPage() {
             <button
               type="button"
               onClick={() => router.back()}
-              className="px-4 py-2 text-slate-600 hover:text-slate-300 text-sm font-medium transition-colors"
+              className="px-4 py-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-300 text-sm font-medium transition-colors"
             >
               Cancel
             </button>
@@ -288,7 +288,7 @@ export default function NewJobPage() {
 function Section({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div>
-      <p className="text-[9px] tracking-[0.24em] text-slate-600 uppercase font-semibold mb-5 pb-3 border-b border-white/[0.05]">
+      <p className="text-[9px] tracking-[0.24em] text-slate-600 uppercase font-semibold mb-5 pb-3 border-b border-slate-200 dark:border-white/[0.05]">
         {label}
       </p>
       <div className="space-y-5">{children}</div>
@@ -310,7 +310,7 @@ function GhostInput({
       )}
       <input
         type="text"
-        className="w-full bg-transparent border-b border-white/[0.08] focus:border-cyan-400 py-2 text-slate-100 placeholder-slate-700 focus:outline-none transition-colors text-sm"
+        className="w-full bg-transparent border-b border-slate-200 dark:border-white/[0.08] focus:border-cyan-400 py-2 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-700 focus:outline-none transition-colors text-sm"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         required={required}
@@ -338,13 +338,13 @@ function TagListField({
           <div key={i} className="flex items-center gap-2">
             <input
               type="text"
-              className="flex-1 bg-transparent border-b border-white/[0.08] focus:border-cyan-400 py-1.5 text-slate-200 placeholder-slate-700 focus:outline-none transition-colors text-sm"
+              className="flex-1 bg-transparent border-b border-slate-200 dark:border-white/[0.08] focus:border-cyan-400 py-1.5 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-700 focus:outline-none transition-colors text-sm"
               value={item}
               onChange={(e) => onChange(i, e.target.value)}
               placeholder={placeholder}
             />
             {items.length > 1 && (
-              <button type="button" onClick={() => onRemove(i)} className="p-1 text-slate-700 hover:text-rose-400 transition-colors">
+              <button type="button" onClick={() => onRemove(i)} className="p-1 text-slate-500 dark:text-slate-600 hover:text-rose-400 transition-colors">
                 <XIcon className="w-3.5 h-3.5" />
               </button>
             )}

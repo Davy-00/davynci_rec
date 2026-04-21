@@ -6,6 +6,7 @@ import Link from "next/link";
 import axios from "axios";
 import { ZapIcon, EyeIcon, EyeOffIcon, AlertCircleIcon } from "lucide-react";
 import { setToken } from "@/lib/auth";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const API = process.env.NEXT_PUBLIC_API_URL || "https://davinci-backend-production.up.railway.app/api";
 
@@ -38,20 +39,24 @@ export default function HRSignupPage() {
   }
 
   return (
-    <div className="min-h-screen dot-bg flex flex-col items-center justify-center px-6">
+    <div className="relative min-h-screen dot-bg flex flex-col items-center justify-center px-6">
+      <div className="absolute right-4 top-4">
+        <ThemeToggle />
+      </div>
+
       {/* Brand */}
       <div className="flex items-center gap-2.5 mb-10">
         <div className="w-9 h-9 rounded-xl bg-cyan-400/10 border border-cyan-400/20 flex items-center justify-center">
           <ZapIcon className="w-4 h-4 text-cyan-400" />
         </div>
         <div className="leading-none">
-          <p className="text-base font-bold text-white tracking-tight">Davinci</p>
+          <p className="text-base font-bold text-slate-900 dark:text-white tracking-tight">Davinci</p>
           <p className="text-[9px] text-slate-600 font-medium tracking-[0.2em] uppercase">HR Portal</p>
         </div>
       </div>
 
-      <div className="w-full max-w-sm bg-[#0d0d1a] border border-white/[0.07] rounded-2xl p-8">
-        <h1 className="text-xl font-black text-white tracking-tight mb-1">Create account</h1>
+      <div className="w-full max-w-sm bg-white dark:bg-[#0d0d1a] border border-slate-200 dark:border-white/[0.07] rounded-2xl p-8">
+        <h1 className="text-xl font-black text-slate-900 dark:text-white tracking-tight mb-1">Create account</h1>
         <p className="text-xs text-slate-600 mb-7">HR & recruiter access only.</p>
 
         {error && (
@@ -73,7 +78,7 @@ export default function HRSignupPage() {
               minLength={3}
               maxLength={32}
               placeholder="yourname"
-              className="bg-[#080810] border border-white/[0.07] focus:border-cyan-400/40 rounded-xl px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-700 focus:outline-none transition-colors"
+              className="bg-slate-50 dark:bg-[#080810] border border-slate-200 dark:border-white/[0.07] focus:border-cyan-400/40 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-700 focus:outline-none transition-colors"
             />
           </label>
 
@@ -88,12 +93,12 @@ export default function HRSignupPage() {
                 required
                 minLength={8}
                 placeholder="Min 8 characters"
-                className="w-full bg-[#080810] border border-white/[0.07] focus:border-cyan-400/40 rounded-xl px-3.5 py-2.5 pr-10 text-sm text-slate-100 placeholder-slate-700 focus:outline-none transition-colors"
+                className="w-full bg-slate-50 dark:bg-[#080810] border border-slate-200 dark:border-white/[0.07] focus:border-cyan-400/40 rounded-xl px-3.5 py-2.5 pr-10 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-700 focus:outline-none transition-colors"
               />
               <button
                 type="button"
                 onClick={() => setShowPw((v) => !v)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-600 hover:text-slate-400 transition-colors"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 dark:text-slate-600 hover:text-slate-700 dark:hover:text-slate-400 transition-colors"
                 tabIndex={-1}
               >
                 {showPw ? <EyeOffIcon className="w-4 h-4" /> : <EyeIcon className="w-4 h-4" />}
@@ -110,14 +115,14 @@ export default function HRSignupPage() {
               onChange={(e) => setConfirm(e.target.value)}
               required
               placeholder="••••••••"
-              className="bg-[#080810] border border-white/[0.07] focus:border-cyan-400/40 rounded-xl px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-700 focus:outline-none transition-colors"
+              className="bg-slate-50 dark:bg-[#080810] border border-slate-200 dark:border-white/[0.07] focus:border-cyan-400/40 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-700 focus:outline-none transition-colors"
             />
           </label>
 
           <button
             type="submit"
             disabled={loading || !username || !password || !confirm}
-            className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold text-sm py-3 rounded-xl transition-all mt-2"
+            className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 disabled:opacity-50 disabled:cursor-not-allowed text-slate-900 dark:text-white font-bold text-sm py-3 rounded-xl transition-all mt-2"
           >
             {loading ? (
               <>

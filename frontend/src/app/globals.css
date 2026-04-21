@@ -2,15 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Theme variables ───────────────────── */
+:root {
+  --toast-bg: #ffffff;
+  --toast-fg: #0f172a;
+}
+.dark {
+  --toast-bg: #0d0d1a;
+  --toast-fg: #f0f9ff;
+}
+
 /* ── Scrollbar ─────────────────────────── */
 .scrollbar-thin::-webkit-scrollbar { width: 3px; }
 .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
-.scrollbar-thin::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 2px; }
-.scrollbar-thin::-webkit-scrollbar-thumb:hover { background: #334155; }
+.scrollbar-thin::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 2px; }
+.scrollbar-thin::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+.dark .scrollbar-thin::-webkit-scrollbar-thumb { background: #1e293b; }
+.dark .scrollbar-thin::-webkit-scrollbar-thumb:hover { background: #334155; }
 
 /* ── Selection ─────────────────────────── */
 ::selection {
   background: rgba(34, 211, 238, 0.2);
+  color: #0f172a;
+}
+.dark ::selection {
   color: #f0f9ff;
 }
 
@@ -27,9 +42,13 @@
 
 /* ── Dot grid background ────────────────── */
 .dot-bg {
+  background-color: #f8fafc;
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.055) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+.dark .dot-bg {
   background-color: #080810;
   background-image: radial-gradient(circle, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-  background-size: 22px 22px;
 }
 
 /* ── Fade rise entrance ─────────────────── */
@@ -57,11 +76,15 @@
 /* ── Date/Month Picker Calendar Styling ─── */
 input[type="date"]::-webkit-calendar-picker-indicator,
 input[type="month"]::-webkit-calendar-picker-indicator {
-  filter: invert(1) brightness(1.2);
+  filter: invert(0.5) brightness(0.8);
   cursor: pointer;
   padding: 4px;
   border-radius: 4px;
   transition: all 0.2s ease;
+}
+.dark input[type="date"]::-webkit-calendar-picker-indicator,
+.dark input[type="month"]::-webkit-calendar-picker-indicator {
+  filter: invert(1) brightness(1.2);
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator:hover,
@@ -72,6 +95,9 @@ input[type="month"]::-webkit-calendar-picker-indicator:hover {
 /* WebKit-based date picker popup styling */
 ::-webkit-datetime-edit {
   padding: 0;
+  color: rgb(51, 65, 85);
+}
+.dark ::-webkit-datetime-edit {
   color: rgb(226, 232, 240);
 }
 
@@ -83,9 +109,15 @@ input[type="month"]::-webkit-calendar-picker-indicator:hover {
 ::-webkit-datetime-edit-month-field,
 ::-webkit-datetime-edit-day-field,
 ::-webkit-datetime-edit-year-field {
-  color: rgb(226, 232, 240);
+  color: rgb(51, 65, 85);
   padding: 2px 4px;
   border-radius: 4px;
+  background: rgba(0, 0, 0, 0.04);
+}
+.dark ::-webkit-datetime-edit-month-field,
+.dark ::-webkit-datetime-edit-day-field,
+.dark ::-webkit-datetime-edit-year-field {
+  color: rgb(226, 232, 240);
   background: rgba(255, 255, 255, 0.03);
 }
 

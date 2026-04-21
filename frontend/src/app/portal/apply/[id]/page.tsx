@@ -325,10 +325,10 @@ export default function PortalApplyPage() {
         <div className="w-16 h-16 rounded-2xl bg-emerald-400/10 border border-emerald-400/20 flex items-center justify-center mb-6">
           <CheckCircleIcon className="w-8 h-8 text-emerald-400" />
         </div>
-        <h1 className="text-2xl font-black text-white mb-2">Application submitted!</h1>
+        <h1 className="text-2xl font-black text-slate-900 dark:text-white mb-2">Application submitted!</h1>
         <p className="text-sm text-slate-500 mb-8">
-          Thank you, <span className="text-slate-300 font-semibold">{firstName}</span>. Your structured talent profile for
-          <span className="text-slate-300"> {job?.title}</span> has been received.
+          Thank you, <span className="text-slate-900 dark:text-slate-300 font-semibold">{firstName}</span>. Your structured talent profile for
+          <span className="text-slate-900 dark:text-slate-300"> {job?.title}</span> has been received.
         </p>
         <Link
           href="/portal"
@@ -353,7 +353,7 @@ export default function PortalApplyPage() {
         <p className="text-[10px] tracking-[0.3em] text-cyan-400/70 uppercase font-semibold mb-2">
           {job?.department || "Apply"}
         </p>
-        <h1 className="text-3xl font-black text-white tracking-tight mb-1">
+        <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight mb-1">
           {job?.title ?? "Apply for this role"}
         </h1>
         <p className="text-xs text-slate-600 mb-10">
@@ -403,7 +403,7 @@ export default function PortalApplyPage() {
             </div>
             <div className="space-y-3">
               {skillEntries.map((item, index) => (
-                <div key={index} className="grid grid-cols-1 md:grid-cols-12 gap-3 bg-[#0d0d1a] border border-white/[0.06] rounded-2xl p-3">
+                <div key={index} className="grid grid-cols-1 md:grid-cols-12 gap-3 bg-white dark:bg-[#0d0d1a] border border-slate-200 dark:border-white/[0.06] rounded-2xl p-3">
                   <div className="md:col-span-5">
                     <Field
                       label="Skill"
@@ -458,7 +458,7 @@ export default function PortalApplyPage() {
             <div className="space-y-3">
               {languageEntries.length === 0 && <p className="text-xs text-slate-600">Optional but helpful for screening context.</p>}
               {languageEntries.map((item, index) => (
-                <div key={index} className="grid grid-cols-1 md:grid-cols-12 gap-3 bg-[#0d0d1a] border border-white/[0.06] rounded-2xl p-3">
+                <div key={index} className="grid grid-cols-1 md:grid-cols-12 gap-3 bg-white dark:bg-[#0d0d1a] border border-slate-200 dark:border-white/[0.06] rounded-2xl p-3">
                   <div className="md:col-span-6">
                     <Field
                       label="Language"
@@ -510,9 +510,9 @@ export default function PortalApplyPage() {
             </div>
             <div className="space-y-3">
               {experienceEntries.map((item, index) => (
-                <div key={index} className="bg-[#0d0d1a] border border-white/[0.06] rounded-2xl p-4 space-y-3">
+                <div key={index} className="bg-white dark:bg-[#0d0d1a] border border-slate-200 dark:border-white/[0.06] rounded-2xl p-4 space-y-3">
                   <div className="flex justify-between items-center">
-                    <p className="text-xs font-semibold text-slate-300">Experience {index + 1}</p>
+                    <p className="text-xs font-semibold text-slate-700 dark:text-slate-300">Experience {index + 1}</p>
                     {experienceEntries.length > 1 && (
                       <RemoveRowButton onClick={() => setExperienceEntries((prev) => prev.filter((_, i) => i !== index))} />
                     )}
@@ -525,14 +525,14 @@ export default function PortalApplyPage() {
                   </div>
                   <Field label="Technologies" value={item.technologies} onChange={(value) => setExperienceEntries((prev) => prev.map((row, i) => (i === index ? { ...row, technologies: value } : row)))} placeholder="Node.js, PostgreSQL, Docker" />
                   <Textarea label="Description" value={item.description} onChange={(value) => setExperienceEntries((prev) => prev.map((row, i) => (i === index ? { ...row, description: value } : row)))} placeholder="Key responsibilities and achievements" rows={3} />
-                  <label className="inline-flex items-center gap-2 text-xs text-slate-400">
+                  <label className="inline-flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400">
                     <input
                       type="checkbox"
                       checked={item.isCurrent}
                       onChange={(e) =>
                         setExperienceEntries((prev) => prev.map((row, i) => (i === index ? { ...row, isCurrent: e.target.checked } : row)))
                       }
-                      className="rounded border-white/[0.08] bg-[#0d0d1a]"
+                      className="rounded border-slate-200 dark:border-white/[0.08] bg-white dark:bg-[#0d0d1a]"
                     />
                     I currently work here
                   </label>
@@ -553,7 +553,7 @@ export default function PortalApplyPage() {
             </div>
             <div className="space-y-3">
               {educationEntries.map((item, index) => (
-                <div key={index} className="grid grid-cols-1 md:grid-cols-12 gap-3 bg-[#0d0d1a] border border-white/[0.06] rounded-2xl p-3">
+                <div key={index} className="grid grid-cols-1 md:grid-cols-12 gap-3 bg-white dark:bg-[#0d0d1a] border border-slate-200 dark:border-white/[0.06] rounded-2xl p-3">
                   <div className="md:col-span-4">
                     <Field label="Institution" required={index === 0} value={item.institution} onChange={(value) => setEducationEntries((prev) => prev.map((row, i) => (i === index ? { ...row, institution: value } : row)))} placeholder="University Name" />
                   </div>
@@ -594,9 +594,9 @@ export default function PortalApplyPage() {
             </div>
             <div className="space-y-3">
               {projectEntries.map((item, index) => (
-                <div key={index} className="bg-[#0d0d1a] border border-white/[0.06] rounded-2xl p-4 space-y-3">
+                <div key={index} className="bg-white dark:bg-[#0d0d1a] border border-slate-200 dark:border-white/[0.06] rounded-2xl p-4 space-y-3">
                   <div className="flex justify-between items-center">
-                    <p className="text-xs font-semibold text-slate-300">Project {index + 1}</p>
+                    <p className="text-xs font-semibold text-slate-700 dark:text-slate-300">Project {index + 1}</p>
                     {projectEntries.length > 1 && (
                       <RemoveRowButton onClick={() => setProjectEntries((prev) => prev.filter((_, i) => i !== index))} />
                     )}
@@ -626,7 +626,7 @@ export default function PortalApplyPage() {
             <div className="space-y-3">
               {certificationEntries.length === 0 && <p className="text-xs text-slate-600">Optional professional certifications.</p>}
               {certificationEntries.map((item, index) => (
-                <div key={index} className="grid grid-cols-1 md:grid-cols-12 gap-3 bg-[#0d0d1a] border border-white/[0.06] rounded-2xl p-3">
+                <div key={index} className="grid grid-cols-1 md:grid-cols-12 gap-3 bg-white dark:bg-[#0d0d1a] border border-slate-200 dark:border-white/[0.06] rounded-2xl p-3">
                   <div className="md:col-span-5">
                     <Field label="Name" value={item.name} onChange={(value) => setCertificationEntries((prev) => prev.map((row, i) => (i === index ? { ...row, name: value } : row)))} placeholder="AWS Certified Developer" />
                   </div>
@@ -665,14 +665,14 @@ export default function PortalApplyPage() {
                 "border-2 border-dashed rounded-2xl p-6 flex flex-col items-center cursor-pointer transition-colors",
                 resume
                   ? "border-cyan-400/30 bg-cyan-400/[0.03]"
-                  : "border-white/[0.08] hover:border-white/20 bg-transparent"
+                  : "border-slate-200 dark:border-white/[0.08] hover:border-slate-300 dark:hover:border-white/20 bg-transparent"
               )}
               onClick={() => fileRef.current?.click()}
             >
               {resume ? (
                 <div className="flex items-center gap-2.5">
                   <PaperclipIcon className="w-4 h-4 text-cyan-400" />
-                  <span className="text-sm text-slate-300 font-medium truncate max-w-xs">{resume.name}</span>
+                  <span className="text-sm text-slate-900 dark:text-slate-300 font-medium truncate max-w-xs">{resume.name}</span>
                   <button
                     type="button"
                     onClick={(e) => {
@@ -689,7 +689,7 @@ export default function PortalApplyPage() {
                 <>
                   <UploadIcon className="w-5 h-5 text-slate-600 mb-2" />
                   <p className="text-xs text-slate-500 text-center">Drop your PDF here or click to upload</p>
-                  <p className="text-[10px] text-slate-700 mt-1">PDF · max 10 MB</p>
+                  <p className="text-[10px] text-slate-500 dark:text-slate-600 mt-1">PDF · max 10 MB</p>
                 </>
               )}
             </div>
@@ -724,7 +724,7 @@ export default function PortalApplyPage() {
             <button
               type="submit"
               disabled={stage === "submitting"}
-              className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold text-sm py-4 rounded-2xl transition-all shadow-lg shadow-cyan-500/20"
+              className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 disabled:opacity-50 disabled:cursor-not-allowed text-slate-900 dark:text-white font-bold text-sm py-4 rounded-2xl transition-all shadow-lg shadow-cyan-500/20"
             >
               {stage === "submitting" ? (
                 <>
@@ -735,7 +735,7 @@ export default function PortalApplyPage() {
                 "Submit talent profile"
               )}
             </button>
-            <p className="text-center text-[10px] text-slate-700 mt-3">
+            <p className="text-center text-[10px] text-slate-600 dark:text-slate-500 mt-3">
               Core profile fields are required to support accurate AI-based screening.
             </p>
           </div>
@@ -800,13 +800,13 @@ function Field({
         placeholder={placeholder}
         {...(min !== undefined ? { min } : {})}
         className={clsx(
-          "bg-[#0d0d1a] border border-white/[0.07] focus:border-cyan-400/40 rounded-xl px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-700 focus:outline-none transition-all duration-200",
+          "bg-white dark:bg-[#0d0d1a] border border-slate-200 dark:border-white/[0.07] focus:border-cyan-400/40 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-700 focus:outline-none transition-all duration-200",
           (type === "date" || type === "month") && [
-            "[color-scheme:dark]",
+            "[color-scheme:light] dark:[color-scheme:dark]",
             // Calendar icon styling - much more visible and polished
             "[&::-webkit-calendar-picker-indicator]:opacity-100",
             "[&::-webkit-calendar-picker-indicator]:brightness-0",
-            "[&::-webkit-calendar-picker-indicator]:invert",
+            "dark:[&::-webkit-calendar-picker-indicator]:invert",
             "[&::-webkit-calendar-picker-indicator]:cursor-pointer",
             "[&::-webkit-calendar-picker-indicator]:hover:opacity-80",
             "[&::-webkit-calendar-picker-indicator]:transition-opacity",
@@ -814,10 +814,10 @@ function Field({
             "[&::-webkit-calendar-picker-indicator]:h-4",
             "[&::-webkit-calendar-picker-indicator]:mr-0.5",
             // Better focus states
-            "focus:bg-[#12121f]",
+            "focus:bg-slate-50 dark:focus:bg-[#12121f]",
             "focus:shadow-[0_0_0_3px_rgba(34,211,238,0.1)]",
             // Hover state
-            "hover:border-white/[0.12]",
+            "hover:border-slate-300 dark:hover:border-white/[0.12]",
           ]
         )}
       />
@@ -842,10 +842,10 @@ function SelectField({
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="bg-[#0d0d1a] border border-white/[0.07] focus:border-cyan-400/40 rounded-xl px-3.5 py-2.5 text-sm text-slate-100 focus:outline-none transition-colors"
+        className="bg-white dark:bg-[#0d0d1a] border border-slate-200 dark:border-white/[0.07] focus:border-cyan-400/40 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 dark:text-slate-100 focus:outline-none transition-colors"
       >
         {options.map((option) => (
-          <option key={option} value={option} className="bg-[#0d0d1a] text-slate-100">
+          <option key={option} value={option} className="bg-white dark:bg-[#0d0d1a] text-slate-900 dark:text-slate-100">
             {option}
           </option>
         ))}
@@ -875,7 +875,7 @@ function Textarea({
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         rows={rows}
-        className="bg-[#0d0d1a] border border-white/[0.07] focus:border-cyan-400/40 rounded-xl px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-700 focus:outline-none transition-colors resize-none"
+        className="bg-white dark:bg-[#0d0d1a] border border-slate-200 dark:border-white/[0.07] focus:border-cyan-400/40 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-700 focus:outline-none transition-colors resize-none"
       />
     </label>
   );

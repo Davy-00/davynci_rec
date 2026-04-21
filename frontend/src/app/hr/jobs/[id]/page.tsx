@@ -230,12 +230,12 @@ export default function JobScreeningPage() {
       <div className="mb-8">
         <Link
           href="/hr"
-          className="inline-flex items-center gap-1.5 text-slate-600 hover:text-slate-300 text-xs font-medium transition-colors mb-4"
+          className="inline-flex items-center gap-1.5 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-300 text-xs font-medium transition-colors mb-4"
         >
           <ArrowLeftIcon className="w-3 h-3" />
           Dashboard
         </Link>
-        <h1 className="text-3xl font-black text-white tracking-tight">{job?.title}</h1>
+        <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">{job?.title}</h1>
         <p className="text-slate-600 text-xs mt-1.5 font-medium tracking-widest uppercase">
           AI Screening · Bias Guard · Interview Questions
         </p>
@@ -243,7 +243,7 @@ export default function JobScreeningPage() {
 
       {/* Applicant count card */}
       {applicantCount !== null && (
-        <div className="bg-[#0d0d1a] border border-white/[0.07] rounded-2xl p-5 mb-8">
+        <div className="bg-white dark:bg-[#0d0d1a] border border-slate-200 dark:border-white/[0.07] rounded-2xl p-5 mb-8">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-cyan-400/10 border border-cyan-400/20 flex items-center justify-center">
               <UsersIcon className="w-5 h-5 text-cyan-400" />
@@ -252,7 +252,7 @@ export default function JobScreeningPage() {
               <p className="text-xs text-slate-600 font-semibold uppercase tracking-widest mb-0.5">
                 Applications Received
               </p>
-              <p className="text-2xl font-black text-white tabular-nums">
+              <p className="text-2xl font-black text-slate-900 dark:text-white tabular-nums">
                 {applicantCount}
                 <span className="text-xs text-slate-600 font-medium ml-2">
                   {applicantCount === 1 ? 'candidate' : 'candidates'}
@@ -268,7 +268,7 @@ export default function JobScreeningPage() {
         </div>
       )}
 
-      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between bg-[#0d0d1a] border border-white/[0.06] rounded-2xl px-4 py-3.5 md:px-5 mb-8">
+      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between bg-white dark:bg-[#0d0d1a] border border-slate-200 dark:border-white/[0.06] rounded-2xl px-4 py-3.5 md:px-5 mb-8">
         <div className="flex items-center gap-2 flex-wrap">
           <span className="text-[10px] text-slate-600 font-semibold uppercase tracking-widest">
             Shortlist
@@ -281,7 +281,7 @@ export default function JobScreeningPage() {
                 "px-3 py-1 rounded-lg text-xs font-semibold border transition-all",
                 shortlistSize === n
                   ? "bg-cyan-400/10 text-cyan-400 border-cyan-400/20"
-                  : "text-slate-600 border-transparent hover:text-slate-300 hover:border-white/[0.06]"
+                  : "text-slate-600 dark:text-slate-400 border-transparent hover:text-slate-900 dark:hover:text-slate-300 hover:border-slate-200 dark:hover:border-white/[0.06]"
               )}
             >
               Top {n}
@@ -292,7 +292,7 @@ export default function JobScreeningPage() {
         <div className="flex items-center gap-2 flex-wrap">
           <label
             className={clsx(
-              "inline-flex items-center gap-1.5 px-3 py-1.5 border border-white/[0.06] rounded-xl text-xs text-slate-500 cursor-pointer hover:bg-white/[0.04] hover:text-slate-300 transition-all",
+              "inline-flex items-center gap-1.5 px-3 py-1.5 border border-slate-200 dark:border-white/[0.06] rounded-xl text-xs text-slate-500 dark:text-slate-400 cursor-pointer hover:bg-slate-100 dark:hover:bg-white/[0.04] hover:text-slate-900 dark:hover:text-slate-300 transition-all",
               uploading && "opacity-40 pointer-events-none"
             )}
           >
@@ -313,7 +313,7 @@ export default function JobScreeningPage() {
       </div>
 
       {polling && (
-        <div className="bg-[#0d0d1a] border border-cyan-400/15 rounded-2xl p-6 md:p-7 mb-8">
+        <div className="bg-white dark:bg-[#0d0d1a] border border-cyan-400/15 rounded-2xl p-6 md:p-7 mb-8">
           <div className="flex items-center gap-2.5 mb-5">
             <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
             <span className="text-[10px] tracking-[0.18em] text-slate-500 uppercase font-semibold">
@@ -333,7 +333,7 @@ export default function JobScreeningPage() {
 
           {screening?.progress && screening.progress.total > 0 && (
             <div className="mb-5">
-              <div className="h-1 bg-white/[0.06] rounded-full overflow-hidden">
+              <div className="h-1 bg-slate-200 dark:bg-white/[0.06] rounded-full overflow-hidden">
                 <div
                   className="h-full bg-cyan-400 rounded-full transition-all duration-700"
                   style={{
@@ -362,7 +362,7 @@ export default function JobScreeningPage() {
                         ? "border-cyan-400/20 bg-cyan-400/5"
                         : candidate.overallScore && candidate.overallScore >= 70
                         ? "border-emerald-400/20 bg-emerald-400/5"
-                        : "border-white/[0.06] bg-white/[0.02]"
+                        : "border-slate-200 dark:border-white/[0.06] bg-slate-50 dark:bg-white/[0.02]"
                     )}
                   >
                     {candidate.status === "analyzing" ? (
@@ -374,7 +374,7 @@ export default function JobScreeningPage() {
                     )}
                     
                     <div className="flex-1 min-w-0">
-                      <p className="text-xs font-semibold text-white truncate">
+                      <p className="text-xs font-semibold text-slate-900 dark:text-white truncate">
                         {candidate.candidateName}
                       </p>
                       {candidate.status === "completed" && candidate.recommendation && (
@@ -403,13 +403,13 @@ export default function JobScreeningPage() {
           )}
 
           <div className="space-y-2 font-mono">
-            <p className="text-sm text-slate-300">
+            <p className="text-sm text-slate-700 dark:text-slate-300">
               {screening?.progress && screening.progress.completed > 0
                 ? `Analyzed ${screening.progress.completed} of ${screening.progress.total} applicants...`
                 : "Analyzing applicants one by one..."}
             </p>
-            <p className="text-sm text-slate-500">Running bias detection pipeline...</p>
-            <p className="text-sm text-slate-700">
+            <p className="text-sm text-slate-500 dark:text-slate-400">Running bias detection pipeline...</p>
+            <p className="text-sm text-slate-500 dark:text-slate-400">
               Generating tailored interview questions
               <span className="blink text-cyan-400">_</span>
             </p>
@@ -440,7 +440,7 @@ export default function JobScreeningPage() {
                 <ShieldCheckIcon
                   className={clsx("w-4 h-4", biasConfig[screening.biasAudit.riskLevel].icon)}
                 />
-                <span className="text-sm font-bold text-slate-200">Bias Guard Audit</span>
+                <span className="text-sm font-bold text-slate-900 dark:text-slate-200">Bias Guard Audit</span>
               </div>
               <span
                 className={clsx(
@@ -451,7 +451,7 @@ export default function JobScreeningPage() {
                 {screening.biasAudit.riskLevel} risk
               </span>
             </div>
-            <p className="text-sm text-slate-400 leading-relaxed mb-3">
+            <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-3">
               {screening.biasAudit.overallAssessment}
             </p>
             {screening.biasAudit.flags.length > 0 && (
@@ -459,11 +459,11 @@ export default function JobScreeningPage() {
                 {screening.biasAudit.flags.map((flag, i) => (
                   <div
                     key={i}
-                    className="flex items-start gap-2.5 text-xs bg-black/20 rounded-xl px-3 py-2.5"
+                    className="flex items-start gap-2.5 text-xs bg-slate-100 dark:bg-black/20 rounded-xl px-3 py-2.5"
                   >
                     <AlertTriangleIcon className="w-3.5 h-3.5 text-amber-400 mt-0.5 shrink-0" />
                     <div>
-                      <span className="font-semibold text-slate-300 capitalize">
+                      <span className="font-semibold text-slate-700 dark:text-slate-300 capitalize">
                         {flag.type.replace(/_/g, " ")}: 
                       </span>
                       <span className="text-slate-500">{flag.description}</span>
@@ -542,8 +542,8 @@ function CandidateCard({
   return (
     <div
       className={clsx(
-        "bg-[#0d0d1a] border rounded-2xl overflow-hidden transition-all",
-        expanded ? "border-cyan-400/20" : "border-white/[0.06] hover:border-white/[0.1]"
+        "bg-white dark:bg-[#0d0d1a] border rounded-2xl overflow-hidden transition-all",
+        expanded ? "border-cyan-400/20" : "border-slate-200 dark:border-white/[0.06] hover:border-slate-300 dark:hover:border-white/[0.1]"
       )}
     >
       <div role="button" tabIndex={0} onClick={onToggle} onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onToggle(); } }} className="w-full flex items-center gap-4 px-5 py-4 text-left">
@@ -555,7 +555,7 @@ function CandidateCard({
         <ScoreRing score={candidate.overallScore} />
 
         <div className="flex-1 min-w-0">
-          <p className="font-bold text-slate-100 text-sm leading-none">{candidate.candidateName}</p>
+          <p className="font-bold text-slate-900 dark:text-slate-100 text-sm leading-none">{candidate.candidateName}</p>
           <p className="text-xs text-slate-600 truncate mt-1">{candidate.recommendation}</p>
           {candidate.documentStatus !== "sufficient" && (
             <span
@@ -613,7 +613,7 @@ function CandidateCard({
 
 
       {expanded && (
-        <div className="border-t border-white/[0.06] px-5 py-6">
+        <div className="border-t border-slate-200 dark:border-white/[0.06] px-5 py-6">
           {candidate.documentStatus !== "sufficient" && candidate.documentNotes && (
             <div
               className={clsx(
@@ -642,9 +642,9 @@ function CandidateCard({
                   <div key={item.label}>
                     <div className="flex justify-between text-xs mb-1">
                       <span className="text-slate-600">{item.label}</span>
-                      <span className="text-slate-300 font-bold tabular-nums">{item.value}</span>
+                      <span className="text-slate-700 dark:text-slate-300 font-bold tabular-nums">{item.value}</span>
                     </div>
-                    <div className="h-0.5 bg-white/[0.06] rounded-full overflow-hidden">
+                    <div className="h-0.5 bg-slate-200 dark:bg-white/[0.06] rounded-full overflow-hidden">
                       <div
                         className="h-full rounded-full bg-cyan-400"
                         style={{
@@ -664,7 +664,7 @@ function CandidateCard({
                   </p>
                   <ul className="space-y-1.5">
                     {candidate.strengths.map((s, i) => (
-                      <li key={i} className="flex items-start gap-2 text-xs text-slate-400">
+                      <li key={i} className="flex items-start gap-2 text-xs text-slate-600 dark:text-slate-400">
                         <CheckCircleIcon className="w-3.5 h-3.5 text-emerald-500 mt-0.5 shrink-0" />
                         {s}
                       </li>
@@ -680,7 +680,7 @@ function CandidateCard({
                   </p>
                   <ul className="space-y-1.5">
                     {candidate.gaps.map((g, i) => (
-                      <li key={i} className="flex items-start gap-2 text-xs text-slate-400">
+                      <li key={i} className="flex items-start gap-2 text-xs text-slate-600 dark:text-slate-400">
                         <AlertTriangleIcon className="w-3.5 h-3.5 text-amber-500 mt-0.5 shrink-0" />
                         {g}
                       </li>
@@ -719,7 +719,7 @@ function CandidateCard({
           </div>
 
           {candidate.interviewQuestions && candidate.interviewQuestions.length > 0 && (
-            <div className="border-t border-white/[0.06] pt-5">
+            <div className="border-t border-slate-200 dark:border-white/[0.06] pt-5">
               <div className="flex items-center gap-2 mb-4">
                 <MessageSquareIcon className="w-3.5 h-3.5 text-cyan-400" />
                 <p className="text-[9px] tracking-[0.18em] text-slate-600 uppercase font-semibold">
@@ -733,17 +733,17 @@ function CandidateCard({
                       {i + 1}.
                     </span>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm text-slate-300 leading-relaxed">{q.question}</p>
+                      <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">{q.question}</p>
                       <div className="flex items-center gap-2 mt-2 flex-wrap">
                         <span
                           className={clsx(
                             "text-[10px] font-semibold px-2 py-0.5 rounded-md",
-                            areaConfig[q.area] ?? "text-slate-500 bg-slate-800/60"
+                            areaConfig[q.area] ?? "text-slate-600 dark:text-slate-500 bg-slate-100 dark:bg-slate-800/60"
                           )}
                         >
                           {q.area.replace(/_/g, " ")}
                         </span>
-                        {q.rationale && <span className="text-[10px] text-slate-700">{q.rationale}</span>}
+                        {q.rationale && <span className="text-[10px] text-slate-500 dark:text-slate-400">{q.rationale}</span>}
                       </div>
                     </div>
                   </li>

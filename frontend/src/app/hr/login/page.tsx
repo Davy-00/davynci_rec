@@ -7,7 +7,7 @@ import axios from "axios";
 import { ZapIcon, EyeIcon, EyeOffIcon, AlertCircleIcon } from "lucide-react";
 import { setToken } from "@/lib/auth";
 
-const API = process.env.NEXT_PUBLIC_API_URL;
+const API = process.env.NEXT_PUBLIC_API_URL || "https://davinci-backend-production.up.railway.app/api";
 
 export default function HRLoginPage() {
   const router = useRouter();

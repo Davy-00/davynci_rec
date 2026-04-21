@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 import { useState } from "react";
 import { clearToken } from "@/lib/auth";
 
-const API = process.env.NEXT_PUBLIC_API_URL;
+const API = process.env.NEXT_PUBLIC_API_URL || "https://davinci-backend-production.up.railway.app/api";
 
 const nav = [
   { href: "/hr", label: "Dashboard", icon: BriefcaseIcon, exact: true },

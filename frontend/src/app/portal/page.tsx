@@ -6,7 +6,7 @@ import axios from "axios";
 import { BriefcaseIcon, MapPinIcon, ClockIcon, ArrowRightIcon, SearchIcon } from "lucide-react";
 import clsx from "clsx";
 
-const API = process.env.NEXT_PUBLIC_API_URL;
+const API = process.env.NEXT_PUBLIC_API_URL || "https://davinci-backend-production.up.railway.app/api";
 
 interface Job {
   _id: string;

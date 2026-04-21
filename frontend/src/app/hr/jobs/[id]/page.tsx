@@ -40,7 +40,7 @@ import {
   Tooltip,
 } from "recharts";
 
-const API = process.env.NEXT_PUBLIC_API_URL;
+const API = process.env.NEXT_PUBLIC_API_URL || "https://davinci-backend-production.up.railway.app/api";
 const POLL_INTERVAL = 1500;
 
 function ScoreRing({ score, size = 52 }: { score: number; size?: number }) {

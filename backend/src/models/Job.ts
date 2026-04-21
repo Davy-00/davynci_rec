@@ -1,7 +1,7 @@
 import mongoose, { Schema, Document } from "mongoose";
 
 export interface JobDoc extends Document {
-  userId: mongoose.Types.ObjectId;
+  userId: mongoose.Types.ObjectId | string;
   title: string;
   department?: string;
   location?: string;
@@ -25,7 +25,7 @@ export interface JobDoc extends Document {
 
 const JobSchema = new Schema<JobDoc>(
   {
-    userId: { type: Schema.Types.ObjectId, ref: "User", required: true, index: true },
+    userId: { type: Schema.Types.Mixed, required: true, index: true },
     title: { type: String, required: true, trim: true },
     department: String,
     location: String,

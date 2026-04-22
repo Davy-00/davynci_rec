@@ -68,6 +68,16 @@ export const updateJobStatus = createAsyncThunk(
   }
 );
 
+export const updateJob = createAsyncThunk(
+  "jobs/update",
+  async ({ id, data }: { id: string; data: Partial<Omit<Job, "_id" | "createdAt">> }) => {
+    const res = await axios.patch(`${API}/jobs/${id}`, data, {
+      headers: { Authorization: authHeader() },
+    });
+    return res.data.data as Job;
+  }
+);
+
 const jobsSlice = createSlice({
   name: "jobs",
   initialState,
@@ -98,6 +108,11 @@ const jobsSlice = createSlice({
         state.selected = action.payload;
       })
       .addCase(updateJobStatus.fulfilled, (state, action) => {
+        const idx = state.list.findIndex((j) => j._id === action.payload._id);
+        if (idx !== -1) state.list[idx] = action.payload;
+        if (state.selected?._id === action.payload._id) state.selected = action.payload;
+      })
+      .addCase(updateJob.fulfilled, (state, action) => {
         const idx = state.list.findIndex((j) => j._id === action.payload._id);
         if (idx !== -1) state.list[idx] = action.payload;
         if (state.selected?._id === action.payload._id) state.selected = action.payload;

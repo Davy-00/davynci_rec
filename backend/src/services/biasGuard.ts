@@ -88,16 +88,15 @@ function buildFallbackBiasAudit(
 }
 
 /**
- * DIFFERENTIATOR #1 — BIAS GUARD
+ * Bias Guard — independent audit pass run after primary ranking.
  *
- * After the primary ranking is done, a second independent Gemini call
- * audits the shortlist for potential bias signals. This is unique in the
- * hackathon field and directly addresses "AI clarity and responsibility".
+ * A second Gemini call reviews the shortlist for potential bias signals
+ * to support fair, explainable AI hiring decisions.
  *
- * The audit checks for:
- * - Institution concentration (did we over-index on graduates from one school?)
- * - Company-type bias (all Big Tech, ignoring strong startup candidates?)
- * - Experience-gap bias (penalizing career breaks unfairly?)
+ * Checks include:
+ * - Institution concentration (over-indexing on graduates from one school)
+ * - Company-type bias (ignoring strong startup candidates)
+ * - Experience-gap bias (penalizing career breaks unfairly)
  * - Language/phrasing bias in the AI's own reasoning
  * - Demographic signal risk from names/locations
  */

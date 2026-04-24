@@ -1,11 +1,11 @@
 /**
- * End-to-end production test script for Davinci AI Screener.
- * Tests ALL features: auth, jobs, applicants, screening (with live updates), bias guard, interview gen, feedback.
+ * End-to-end test script for Davinci AI Screener.
+ * Tests all features: auth, jobs, applicants, screening, bias guard, interview gen, feedback.
  *
- * Usage: cd backend && npx tsx src/scripts/e2e-test.ts
+ * Usage: API_URL=<base_url>/api npx tsx src/scripts/e2e-test.ts
  */
 
-const API = "http://localhost:4000/api";
+const API = process.env.API_URL || "http://localhost:4000/api";
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 

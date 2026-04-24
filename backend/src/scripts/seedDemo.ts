@@ -1,9 +1,9 @@
 /**
  * Demo seed script: Creates 3 jobs and 50 diverse applicants.
- * Usage:  cd backend && npx tsx src/scripts/seedDemo.ts
+ * Usage:  API_URL=<base_url>/api npx tsx src/scripts/seedDemo.ts
  */
 
-const API = "http://localhost:4000/api";
+const API = process.env.API_URL || "http://localhost:4000/api";
 
 async function api(
   method: string,

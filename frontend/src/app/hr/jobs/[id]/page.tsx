@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { fetchJob } from "@/store/jobsSlice";
@@ -12,7 +12,7 @@ import {
   submitFeedback,
   RankedCandidate,
 } from "@/store/screeningSlice";
-import { authHeader } from "@/lib/auth";
+import { authHeader, clearToken } from "@/lib/auth";
 import toast from "react-hot-toast";
 import clsx from "clsx";
 import axios from "axios";
@@ -31,6 +31,7 @@ import {
   FileWarningIcon,
   UsersIcon,
   PencilIcon,
+  Trash2Icon,
 } from "lucide-react";
 import {
   RadarChart,
@@ -103,7 +104,9 @@ export default function JobScreeningPage() {
   const [expandedCandidate, setExpandedCandidate] = useState<number | null>(null);
   const [uploading, setUploading] = useState(false);
   const [applicantCount, setApplicantCount] = useState<number | null>(null);
+  const [deleting, setDeleting] = useState(false);
   const pollingRef = useRef<NodeJS.Timeout | null>(null);
+  const router = useRouter();
 
   // Debug: Log when screening updates
   useEffect(() => {
@@ -202,6 +205,22 @@ export default function JobScreeningPage() {
     }
   }
 
+  async function handleDelete() {
+    if (!confirm(`Delete "${job?.title}"? This will also delete all ${applicantCount || 0} applicants and screening data. This cannot be undone.`)) return;
+    setDeleting(true);
+    try {
+      await axios.delete(`${API}/jobs/${id}`, {
+        headers: { Authorization: authHeader() },
+      });
+      toast.success("Job deleted");
+      router.push("/hr");
+    } catch (err: any) {
+      const message = err?.response?.data?.error || "Failed to delete job";
+      toast.error(message);
+      setDeleting(false);
+    }
+  }
+
   async function handleFeedback(rank: number, feedback: "accepted" | "rejected") {
     if (!screening) return;
     await dispatch(submitFeedback({ screeningId: screening._id, rank, feedback }));
@@ -243,13 +262,23 @@ export default function JobScreeningPage() {
               AI Screening · Bias Guard · Interview Questions
             </p>
           </div>
-          <Link
-            href={`/hr/jobs/${id}/edit`}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-slate-200 dark:border-white/[0.06] rounded-xl text-xs text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/[0.04] hover:text-slate-900 dark:hover:text-slate-300 transition-all shrink-0"
-          >
-            <PencilIcon className="w-3 h-3" />
-            Edit Job
-          </Link>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleDelete}
+              disabled={deleting}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-rose-200 dark:border-rose-500/20 rounded-xl text-xs text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-500/10 transition-all shrink-0"
+            >
+              <Trash2Icon className="w-3 h-3" />
+              {deleting ? "Deleting..." : "Delete"}
+            </button>
+            <Link
+              href={`/hr/jobs/${id}/edit`}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-slate-200 dark:border-white/[0.06] rounded-xl text-xs text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/[0.04] hover:text-slate-900 dark:hover:text-slate-300 transition-all shrink-0"
+            >
+              <PencilIcon className="w-3 h-3" />
+              Edit Job
+            </Link>
+          </div>
         </div>
       </div>
 

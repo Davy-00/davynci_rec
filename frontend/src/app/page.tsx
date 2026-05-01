@@ -7,7 +7,6 @@ import {
   ShieldCheckIcon,
   SparklesIcon,
   ZapIcon,
-  BadgeCheckIcon,
   ScanSearchIcon,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -48,9 +47,6 @@ export default function LandingPage() {
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="hidden md:flex items-center gap-2 text-[10px] text-emerald-700 dark:text-emerald-300 bg-emerald-400/10 border border-emerald-400/20 rounded-full px-3 py-1.5 font-semibold">
-            <BadgeCheckIcon className="w-3.5 h-3.5" /> Demo-ready build
-          </div>
           <ThemeToggle />
         </div>
       </header>

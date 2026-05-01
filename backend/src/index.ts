@@ -32,6 +32,12 @@ const allowedOrigins = (process.env.FRONTEND_URL || "http://localhost:3000")
   .map((o) => o.trim())
   .filter(Boolean);
 
+// Always allow Vercel production domain
+const vercelOrigin = "https://frontend-nine-alpha-49.vercel.app";
+if (!allowedOrigins.includes(vercelOrigin)) {
+  allowedOrigins.push(vercelOrigin);
+}
+
 app.use(
   cors({
     origin: (origin, callback) => {
@@ -43,9 +49,12 @@ app.use(
       ) {
         return callback(null, true);
       }
+      console.warn(`CORS blocked: ${origin}`);
       callback(new Error(`CORS blocked: ${origin}`));
     },
     credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 

@@ -126,7 +126,7 @@ export default function NewJobPage() {
             />
 
             <div>
-              <label className="block text-[9px] tracking-[0.22em] text-slate-600 uppercase font-semibold mb-2">
+              <label className="block text-[9px] tracking-[0.22em] text-slate-600 dark:text-slate-400 uppercase font-semibold mb-2">
                 Work Type
               </label>
               <div className="flex gap-2 flex-wrap">
@@ -149,11 +149,11 @@ export default function NewJobPage() {
             </div>
 
             <div>
-              <label className="block text-[9px] tracking-[0.22em] text-slate-600 uppercase font-semibold mb-2">
+              <label className="block text-[9px] tracking-[0.22em] text-slate-600 dark:text-slate-400 uppercase font-semibold mb-2">
                 Description
               </label>
               <textarea
-                className="w-full bg-transparent border border-slate-200 dark:border-white/[0.06] focus:border-cyan-400/40 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-700 focus:outline-none transition-colors resize-none min-h-[100px]"
+                className="w-full bg-transparent border border-slate-200 dark:border-white/[0.12] focus:border-cyan-400/40 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none transition-colors resize-none min-h-[100px]"
                 value={form.description}
                 onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))}
                 required
@@ -162,7 +162,7 @@ export default function NewJobPage() {
             </div>
 
             <div>
-              <label className="block text-[9px] tracking-[0.22em] text-slate-600 uppercase font-semibold mb-2">
+              <label className="block text-[9px] tracking-[0.22em] text-slate-600 dark:text-slate-400 uppercase font-semibold mb-2">
                 Status
               </label>
               <div className="flex gap-2 flex-wrap">
@@ -195,7 +195,7 @@ export default function NewJobPage() {
               <input
                 type="number"
                 min={0}
-                className="w-24 bg-transparent border-b border-slate-200 dark:border-white/[0.08] focus:border-cyan-400 py-2 text-slate-900 dark:text-slate-100 focus:outline-none transition-colors text-sm tabular-nums"
+                className="w-24 bg-transparent border-b border-slate-200 dark:border-white/[0.12] focus:border-cyan-400 py-2 text-slate-900 dark:text-slate-100 focus:outline-none transition-colors text-sm tabular-nums"
                 value={form.yearsOfExperience}
                 onChange={(e) =>
                   setForm((f) => ({ ...f, yearsOfExperience: Number(e.target.value) }))
@@ -252,7 +252,7 @@ export default function NewJobPage() {
           </Section>
 
           <Section label="Application Questions">
-            <p className="text-[10px] text-slate-600 -mt-3">Questions applicants will answer when applying. Leave empty for none.</p>
+            <p className="text-[10px] text-slate-600 dark:text-slate-400 -mt-3">Questions applicants will answer when applying. Leave empty for none.</p>
             <TagListField
               label=""
               items={form.formQuestions}
@@ -288,7 +288,7 @@ export default function NewJobPage() {
 function Section({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div>
-      <p className="text-[9px] tracking-[0.24em] text-slate-600 uppercase font-semibold mb-5 pb-3 border-b border-slate-200 dark:border-white/[0.05]">
+      <p className="text-[9px] tracking-[0.24em] text-slate-600 dark:text-slate-400 uppercase font-semibold mb-5 pb-3 border-b border-slate-200 dark:border-white/[0.12]">
         {label}
       </p>
       <div className="space-y-5">{children}</div>
@@ -304,13 +304,13 @@ function GhostInput({
   return (
     <div>
       {label && (
-        <label className="block text-[9px] tracking-[0.18em] text-slate-600 uppercase font-semibold mb-2">
+        <label className="block text-[9px] tracking-[0.18em] text-slate-600 dark:text-slate-400 uppercase font-semibold mb-2">
           {label}
         </label>
       )}
       <input
         type="text"
-        className="w-full bg-transparent border-b border-slate-200 dark:border-white/[0.08] focus:border-cyan-400 py-2 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-700 focus:outline-none transition-colors text-sm"
+        className="w-full bg-transparent border-b border-slate-200 dark:border-white/[0.12] focus:border-cyan-400 py-2 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none transition-colors text-sm"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         required={required}
@@ -329,7 +329,7 @@ function TagListField({
   return (
     <div>
       {label && (
-        <label className="block text-[9px] tracking-[0.18em] text-slate-600 uppercase font-semibold mb-2">
+        <label className="block text-[9px] tracking-[0.18em] text-slate-600 dark:text-slate-400 uppercase font-semibold mb-2">
           {label}
         </label>
       )}
@@ -338,20 +338,20 @@ function TagListField({
           <div key={i} className="flex items-center gap-2">
             <input
               type="text"
-              className="flex-1 bg-transparent border-b border-slate-200 dark:border-white/[0.08] focus:border-cyan-400 py-1.5 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-700 focus:outline-none transition-colors text-sm"
+              className="flex-1 bg-transparent border-b border-slate-200 dark:border-white/[0.12] focus:border-cyan-400 py-1.5 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none transition-colors text-sm"
               value={item}
               onChange={(e) => onChange(i, e.target.value)}
               placeholder={placeholder}
             />
             {items.length > 1 && (
-              <button type="button" onClick={() => onRemove(i)} className="p-1 text-slate-500 dark:text-slate-600 hover:text-rose-400 transition-colors">
+              <button type="button" onClick={() => onRemove(i)} className="p-1 text-slate-500 dark:text-slate-400 hover:text-rose-400 transition-colors">
                 <XIcon className="w-3.5 h-3.5" />
               </button>
             )}
           </div>
         ))}
       </div>
-      <button type="button" onClick={onAdd} className="mt-3 inline-flex items-center gap-1.5 text-xs text-slate-600 hover:text-cyan-400 transition-colors font-medium">
+      <button type="button" onClick={onAdd} className="mt-3 inline-flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-400 hover:text-cyan-400 transition-colors font-medium">
         <PlusIcon className="w-3.5 h-3.5" />
         Add
       </button>
